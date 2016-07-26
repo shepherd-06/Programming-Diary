@@ -18,9 +18,7 @@ public class Solution {
             
             String [][]forest = new String[row][column];
             
-            System.out.println("ROW > "+row + " COLUMN > "+column);
-            
-            int startX = 0, startY = 0;
+            int X_co = 0, Y_co = 0;
             
             //populating the forst;
             for(int x = 0; x < row; x++)
@@ -32,24 +30,26 @@ public class Solution {
                     char c = line.charAt(y);
                     
                     forest[x][y] = c + "";
+                    
                     if(c == 'M')
                     {
-                        startX = x;
-                        startY = y;
+                        X_co = x;
+                        Y_co = y;
                     }
                 }
             }
             
+            
             int guess = sc.nextInt(); //RON's guess
             //INPUT DONE
             
-            BFS(forest, startX, startY, guess);
+            BFS(forest, X_co, Y_co, guess);
         }
         
     }
         
     private static String [][]maze;
-    private static Queue<Integer> queue; //to hold the index of current traverse
+    private static ArrayList<Integer> queue; //to hold the index of current traverse
     private static ArrayList<Integer> X, Y; //to hold the co-ordinates to traverse
     private static ArrayList<Integer> oldX, oldY;
     private static int number_of_guesses;
@@ -57,6 +57,12 @@ public class Solution {
 
     public static void BFS(String [][]forest, int startX, int startY, int guess)
     {
+        queue = new ArrayList<Integer>();
+		X = new ArrayList<Integer>();
+		Y = new ArrayList<Integer>();
+        oldX = new ArrayList<Integer>();
+        oldY = new ArrayList<Integer>();
+        
         maze = forest;
         number_of_guesses = guess;
         X.add(startX);
@@ -76,12 +82,14 @@ public class Solution {
         while(!queue.isEmpty())   
         {
             int deadFlag = 0; //to mark the four dead flag;
-            int index = queue.poll(); //get the head of the queue
+            int index = queue.get(0); //get the head of the queue
+            System.out.println("counter >> " + counter + " Current queue >> " + queue.get(0));
+            queue.remove(0); //cut the top of the head in each phase
             int currentX = X.get(index);
             int currentY = Y.get(index);
             
             //left right check
-            if(currentY >= 0 || currentY < maze[0].length)
+            if(currentY >= 0 && currentY < maze[0].length - 1)
             {
                 // LEFT first{row fix, column --}
                  // star
@@ -175,7 +183,7 @@ public class Solution {
             }
             //done with left and right check
             //check UP and DOWN
-            else if(currentX >= 0 || currentX < maze.length)
+            else if(currentX - 1>= 0 && currentX < maze.length - 1)
             {
                 // UP first{row --, column fix}
                  // star
