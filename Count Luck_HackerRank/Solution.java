@@ -51,17 +51,13 @@ public class Solution {
     private static String [][]maze;
     private static ArrayList<Integer> queue; //to hold the index of current traverse
     private static ArrayList<Integer> X, Y; //to hold the co-ordinates to traverse
-    private static ArrayList<Integer> oldX, oldY;
     private static int number_of_guesses;
-    private static int row, column;
 
     public static void BFS(String [][]forest, int startX, int startY, int guess)
     {
         queue = new ArrayList<Integer>();
 		X = new ArrayList<Integer>();
 		Y = new ArrayList<Integer>();
-        oldX = new ArrayList<Integer>();
-        oldY = new ArrayList<Integer>();
         
         maze = forest;
         number_of_guesses = guess;
@@ -79,17 +75,20 @@ public class Solution {
     public static void traverse()
     {
         int counter = 1; // insert this index in queue which will point which index to check NEXT    
+        int totalGuess = 0;
         while(!queue.isEmpty())   
         {
-            int deadFlag = 0; //to mark the four dead flag;
+            int chances = 0; //to trigger how many chances are there
             int index = queue.get(0); //get the head of the queue
-            System.out.println("counter >> " + counter + " Current queue >> " + queue.get(0));
+            //System.out.println("counter >> " + counter + " Current queue >> " + queue.get(0));
             queue.remove(0); //cut the top of the head in each phase
+            
             int currentX = X.get(index);
             int currentY = Y.get(index);
+            System.out.println("Current Co - X >> "+currentX + " Y >> "+currentY);
             
-            //left right check
-            if(currentY >= 0 && currentY < maze[0].length - 1)
+            //left check ONLY
+            if(currentY > 0)
             {
                 // LEFT first{row fix, column --}
                  // star
@@ -103,11 +102,13 @@ public class Solution {
                    if(flag)
                    {
                        //add them to queue
+                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        X.add(newX);
                        Y.add(newY);
-                       counter++;
                        queue.add(counter);
-                       //not a dead End. add current to old
+                       counter++;
+                       chances++;
+                       System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -121,21 +122,19 @@ public class Solution {
                    
                     if(flag)
                     {
+                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
-                        counter++;
                         queue.add(counter);
-                        //not a dead End. add current to old
+                        counter++;
+                        chances++; // increase the number of chances
                     }
                 }
-                else if(maze[currentX][currentY - 1].equals("X") || maze[currentX][currentY - 1].equals("M"))
-                {
-                    //does not matter, left is a dud
-                    //X is a tree and M is starting point.
-                    deadFlag++;
-                }
-                
+            }
+            //RIGHT CHECK
+            if(currentY < maze[0].length - 1)
+            {
                 //----------------------------------------
                 //right check [row same][column ++]
                 if(maze[currentX][currentY + 1].equals("*"))
@@ -147,12 +146,14 @@ public class Solution {
                    
                    if(flag)
                    {
+                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        //add them to queue
                        X.add(newX);
                        Y.add(newY);
-                       counter++;
                        queue.add(counter);
-                       //not a dead End. add current to old
+                       counter++;
+                       chances++; //increase the number of chances
+                       System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -166,24 +167,20 @@ public class Solution {
                    
                     if(flag)
                     {
+                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
-                        counter++;
                         queue.add(counter);
-                        //not a dead End. add current to old
+                        counter++;
+                        chances++;
+                        //increase the number of chances
                     }
-                }
-                else if(maze[currentX][currentY + 1].equals("X") || maze[currentX][currentY + 1].equals("M"))
-                {
-                    //does not matter, left is a dud
-                    //X is a tree and M is starting point.
-                    deadFlag++;
                 }
             }
             //done with left and right check
-            //check UP and DOWN
-            else if(currentX - 1>= 0 && currentX < maze.length - 1)
+            //check UP ONLY
+            if(currentX - 1 > 0)
             {
                 // UP first{row --, column fix}
                  // star
@@ -196,12 +193,14 @@ public class Solution {
                    
                    if(flag)
                    {
+                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        //add them to queue
                        X.add(newX);
                        Y.add(newY);
-                       counter++;
                        queue.add(counter);
-                       //not a dead End. add current to old
+                       counter++;
+                       chances++;
+                       System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -215,21 +214,19 @@ public class Solution {
                    
                     if(flag)
                     {
+                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
-                        counter++;
                         queue.add(counter);
+                        counter++;
+                        chances++;
                         //not a dead End. add current to old
                     }
                 }
-                else if(maze[currentX - 1][currentY].equals("X") || maze[currentX - 1][currentY].equals("M"))
-                {
-                    //does not matter, left is a dud
-                    //X is a tree and M is starting point.
-                    deadFlag++;
-                }
-                
+            }
+            if(currentX < maze.length - 1)
+            {
                 //----------------------------------------
                 //DOWN check [row + 1][column SAME]
                 if(maze[currentX + 1][currentY].equals("*"))
@@ -241,12 +238,14 @@ public class Solution {
                    
                    if(flag)
                    {
+                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        //add them to queue
                        X.add(newX);
                        Y.add(newY);
-                       counter++;
                        queue.add(counter);
-                       //not a dead End. add current to old
+                       counter++;
+                       chances++;
+                       System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -260,35 +259,39 @@ public class Solution {
                    
                     if(flag)
                     {
+                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
-                        counter++;
                         queue.add(counter);
-                        //not a dead End. add current to old
+                        counter++;
+                        chances++;
                     }
                 }
-                else if(maze[currentX + 1][currentY].equals("X") || maze[currentX + 1][currentY].equals("M"))
-                {
-                    //does not matter, left is a dud
-                    //X is a tree and M is starting point.
-                    deadFlag++;
-                }
             }
-            //when all the current co-ordinate is NOT Found dud, (check all four), add it to OLDX or else DON'T
-            if(deadFlag != 4)
+            
+            if(chances > 1)
             {
-                //current co-ordinate is not a dud.
-                oldX.add(currentX);
-                oldY.add(currentY);
+                totalGuess++;
             }
+            
+            //System.out.println("-----------------------------------");
+            //for(int i = 0; i < X.size(); i++)
+           // {
+            //    System.out.println("X >> "+X.get(i) + " Y >> "+Y.get(i));
+            //}
+            //System.out.println("Current Queue index >> "+index);
+            //System.out.println("----------------$$$$-------------------");
         }
         
+        System.out.println("-----------------------------------");
         System.out.println("Printing the Current Co-Ordinates");
-        for(int i = 0; i < oldX.size(); i++)
+        for(int i = 0; i < X.size(); i++)
         {
-            System.out.println("X -> "+oldX.get(i) + " Y -> "+oldY.get(i));
+            System.out.println("X -> "+X.get(i) + " Y -> "+Y.get(i));
         }
+        System.out.println("Total Guess : "+totalGuess);
+        System.out.println("----------------$$$$-------------------");
     }
     
     public static boolean duplicate(int newX, int newY)
