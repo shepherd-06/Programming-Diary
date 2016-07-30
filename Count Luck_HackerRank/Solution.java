@@ -178,12 +178,14 @@ public class Solution {
                     }
                 }
             }
+            
             //done with left and right check
             //check UP ONLY
-            if(currentX - 1 > 0)
+            if(currentX > 0)
             {
                 // UP first{row --, column fix}
                  // star
+                System.out.println("status for 1 - 9 "+currentX);
                 if(maze[currentX - 1][currentY].equals("*"))
                 {
                    int newX = currentX - 1;
@@ -211,6 +213,7 @@ public class Solution {
                     int newY = currentY;
                     //duplicate check
                     boolean flag = duplicate(newX, newY);
+                    System.out.println("Status Duplicate UP : <true means NO> "+flag);
                    
                     if(flag)
                     {
