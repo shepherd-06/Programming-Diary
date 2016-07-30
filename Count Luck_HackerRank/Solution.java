@@ -4,9 +4,18 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
+/*
+* problem -> https://www.hackerrank.com/challenges/count-luck
+* 
+* iBtehaz sHawon
+* ( http://www.ibtehaz.ninja/count-luck-hackerrank/ )
+*
+*/
+
 public class Solution {
 
     public static void main(String[] args) {
+
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner sc = new Scanner(System.in);
         int testCase = sc.nextInt();
