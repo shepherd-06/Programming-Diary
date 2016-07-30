@@ -85,7 +85,7 @@ public class Solution {
             
             int currentX = X.get(index);
             int currentY = Y.get(index);
-            System.out.println("Current Co - X >> "+currentX + " Y >> "+currentY);
+            //System.out.println("Current Co - X >> "+currentX + " Y >> "+currentY);
             
             //left check ONLY
             if(currentY > 0)
@@ -102,13 +102,13 @@ public class Solution {
                    if(flag)
                    {
                        //add them to queue
-                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                       //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        X.add(newX);
                        Y.add(newY);
                        queue.add(counter);
                        counter++;
                        chances++;
-                       System.out.println("Bingo Bango Bongo");
+                       //System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -122,7 +122,7 @@ public class Solution {
                    
                     if(flag)
                     {
-                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                        //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
@@ -146,14 +146,14 @@ public class Solution {
                    
                    if(flag)
                    {
-                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                       //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        //add them to queue
                        X.add(newX);
                        Y.add(newY);
                        queue.add(counter);
                        counter++;
                        chances++; //increase the number of chances
-                       System.out.println("Bingo Bango Bongo");
+                       //System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -167,7 +167,7 @@ public class Solution {
                    
                     if(flag)
                     {
-                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                        //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
@@ -185,7 +185,7 @@ public class Solution {
             {
                 // UP first{row --, column fix}
                  // star
-                System.out.println("status for 1 - 9 "+currentX);
+                //System.out.println("status for 1 - 9 "+currentX);
                 if(maze[currentX - 1][currentY].equals("*"))
                 {
                    int newX = currentX - 1;
@@ -195,14 +195,14 @@ public class Solution {
                    
                    if(flag)
                    {
-                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                       //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        //add them to queue
                        X.add(newX);
                        Y.add(newY);
                        queue.add(counter);
                        counter++;
                        chances++;
-                       System.out.println("Bingo Bango Bongo");
+                       //System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -213,11 +213,11 @@ public class Solution {
                     int newY = currentY;
                     //duplicate check
                     boolean flag = duplicate(newX, newY);
-                    System.out.println("Status Duplicate UP : <true means NO> "+flag);
+                    //System.out.println("Status Duplicate UP : <true means NO> "+flag);
                    
                     if(flag)
                     {
-                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                        //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
@@ -241,14 +241,14 @@ public class Solution {
                    
                    if(flag)
                    {
-                       System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                       //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                        //add them to queue
                        X.add(newX);
                        Y.add(newY);
                        queue.add(counter);
                        counter++;
                        chances++;
-                       System.out.println("Bingo Bango Bongo");
+                       //System.out.println("Bingo Bango Bongo");
                        break;
                    }
                    
@@ -262,7 +262,7 @@ public class Solution {
                    
                     if(flag)
                     {
-                        System.out.println("ADDING X >> "+newX + " Y >> "+newY);
+                        //System.out.println("ADDING X >> "+newX + " Y >> "+newY);
                         //add them to queue
                         X.add(newX);
                         Y.add(newY);
@@ -287,14 +287,23 @@ public class Solution {
             //System.out.println("----------------$$$$-------------------");
         }
         
-        System.out.println("-----------------------------------");
-        System.out.println("Printing the Current Co-Ordinates");
-        for(int i = 0; i < X.size(); i++)
+        //System.out.println("-----------------------------------");
+        //System.out.println("Printing the Current Co-Ordinates");
+        //for(int i = 0; i < X.size(); i++)
+        //{
+          //  System.out.println("X -> "+X.get(i) + " Y -> "+Y.get(i));
+        //}
+        //System.out.println("Total Guess : "+totalGuess);
+        //System.out.println("----------------$$$$-------------------");
+        
+        if(totalGuess != number_of_guesses)
         {
-            System.out.println("X -> "+X.get(i) + " Y -> "+Y.get(i));
+            System.out.println("Oops!");
         }
-        System.out.println("Total Guess : "+totalGuess);
-        System.out.println("----------------$$$$-------------------");
+        else
+        {
+            System.out.println("Impressed");
+        }
     }
     
     public static boolean duplicate(int newX, int newY)
